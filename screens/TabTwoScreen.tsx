@@ -3,13 +3,20 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-
+import WebView from 'react-native-webview';
+import { useState, useEffect } from 'react';
+import * as Permissions from 'expo-permissions';
+import {BarCodeScanner, usePermissions} from 'expo-barcode-scanner';
+import { Camera } from 'expo-camera';
 export default function TabTwoScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
+  return(
+    <View>
+    <Camera
+    style={{width:"100%", height:"60%"}}
+    ref={(r) => {
+    let camera = r; 
+    }}
+    ></Camera>
     </View>
   );
 }
