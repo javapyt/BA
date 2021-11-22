@@ -8,12 +8,24 @@ import { TouchableOpacity } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import {BarCodeScanner, usePermissions} from 'expo-barcode-scanner';
 import { Camera } from 'expo-camera';
+import { Audio } from 'expo-av';
 // Inspired by: https://github.com/federicocotogno/BarCodeApp
+
 export default function TabTwoScreen() {
+  const soundPath = '../assets/sounds/Diginoiz_-_BBOS_-_1d_C_choir.wav';
   const [hasPermission, setHasPermission] = useState(Boolean);
   const[scanned, setScanned] = useState(false); 
   const[text, setText] = useState('Not Scanned so far');
+  const [sound, setSound] = useState(Audio.Sound.createAsync(
+    require(soundPath)));
 
+  async function playSound() {
+    console.log('Loading Sound');
+    await (await sound).sound.playAsync(); 
+     await setSound(Audio.Sound.createAsync(
+      require(soundPath)));
+    }
+    
   const requestCamPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -25,9 +37,10 @@ export default function TabTwoScreen() {
     requestCamPermission();
   }, []);
 
-  const handleBarCodeScanned = ({type = '', data = ''}) => {
+  const handleBarCodeScanned = async ({type = '', data = ''}) => {
     setScanned(true); 
     setText(data); 
+    playSound();
     console.log('Type: ' + type + '\n Data:' + data); 
   }
   
@@ -51,7 +64,7 @@ export default function TabTwoScreen() {
         <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={{height: 400, width: 400}}/>
       </View>
       {scanned ? <Text style={styles.text}>{text}</Text> : null }
-      {scanned ? <Button title={'Repeat Scan?'} onPress={() => setScanned(false)} color='#9c004b'/> : null}
+      {scanned ? <Button title={'Repeat Scan?'} onPress={() => setScanned(false)} color='#9c004b' /> : null}
 
     </View>
   );
@@ -75,14 +88,13 @@ const styles = StyleSheet.create({
   cameraScannerBox: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 300,
-    width: 300,
+    height: 350,
+    width: 350,
     overflow: 'hidden',
     borderRadius: 30,
-    backgroundColor: 'tomato'
   },
     text: {
-      fontSize: 16,
+      fontSize: 12,
       margin: 20,
     },
     button: {
