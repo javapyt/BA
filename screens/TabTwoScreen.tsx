@@ -12,11 +12,11 @@ import { Audio } from 'expo-av';
 // Inspired by: https://github.com/federicocotogno/BarCodeApp
 
 export default function TabTwoScreen() {
-  const soundPath = '../assets/sounds/Diginoiz_-_BBOS_-_1d_C_choir.wav';
+  // const soundPath = '../assets/sounds/Diginoiz_-_BBOS_-_1d_C_choir.wav';
   const [hasPermission, setHasPermission] = useState(Boolean);
   const[scanned, setScanned] = useState(false); 
   const[text, setText] = useState('Not Scanned so far');
-  const [sound, setSound] = useState(Audio.Sound.createAsync(
+  /* const [sound, setSound] = useState(Audio.Sound.createAsync(
     require(soundPath)));
 
   async function playSound() {
@@ -25,7 +25,7 @@ export default function TabTwoScreen() {
      await setSound(Audio.Sound.createAsync(
       require(soundPath)));
     }
-    
+    */ 
   const requestCamPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -40,7 +40,7 @@ export default function TabTwoScreen() {
   const handleBarCodeScanned = async ({type = '', data = ''}) => {
     setScanned(true); 
     setText(data); 
-    playSound();
+    //playSound();
     console.log('Type: ' + type + '\n Data:' + data); 
   }
   
