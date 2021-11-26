@@ -4,12 +4,12 @@ import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function Coeus({ navigation }: RootTabScreenProps<'Coeus'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Benutzungsregeln für das FIL</Text>
+      <Text style={styles.title}>Scan items and get response from Coeus</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      <EditScreenInfo path="/screens/Coeus.tsx" />
     </View>
   );
 }

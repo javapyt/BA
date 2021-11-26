@@ -25,9 +25,19 @@ const linking: LinkingOptions<RootStackParamList> = {
               TabTwoScreen: 'two',
             },
           },
+          Coeus: {
+            screens: {
+              TabTwoScreen: 'coeus',
+            },
+          },
+          Items: {
+            screens: {
+              TabTwoScreen: 'items',
+            },
+          },
         },
       },
-      Modal: 'modal',
+      Modal: 'documentation',
       NotFound: '*',
     },
   },
